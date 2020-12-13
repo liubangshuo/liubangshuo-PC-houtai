@@ -239,15 +239,6 @@ export default {
       };
     },
     update(row) {
-      /*
-        const a = [{x: 1}];
-        const b = a[0];
-        b.x = 2;
-
-        trademarkList: [row]
-        trademarkForm = row
-        trademarkForm.x = 2
-      */
       // 清空表单的校验
       this.$refs.trademarkForm && this.$refs.trademarkForm.clearValidate();
 
@@ -256,11 +247,9 @@ export default {
       // row 代表当前行的数据 {}
       // this.trademarkForm = row; // 地址值一样，修改trademarkForm会导致trademarkList发生变化
       this.trademarkForm = { ...row };
-      // this.trademarkForm = JSON.parse(JSON.stringify(row));
+    
     },
-    // updateCount() {
-    //   this.count++;
-    // },
+
     // 提交表单
     submitForm(form) {
       // 校验表单
@@ -375,6 +364,8 @@ export default {
     可以省略 {}
     可以省略 :
     可以省略 ;
+    
+
 
   scoped
     让样式只在当前组件生效
