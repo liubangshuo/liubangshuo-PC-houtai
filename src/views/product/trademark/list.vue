@@ -48,19 +48,6 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- <el-pagination
-      class="trademark-pagination"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :page-sizes="[3, 6, 9]"
-      :page-size.sync="limit"
-      :current-page="page"
-      layout="prev, pager, next, jumper, sizes, total"
-      :total="total"
-    >
-    </el-pagination> -->
-
     <!--
       :page-size.sync="limit"   可以让limit更新变成同步更新
       :current-page.sync="page" 可以让page更新变成同步更新
