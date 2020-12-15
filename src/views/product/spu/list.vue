@@ -32,6 +32,13 @@ export default {
       this.isShowList = false;
       this.item = { ...row };
     },
+    showList(category3Id) {
+      this.isShowList = true;
+      // 等showList组件加载完成，在触发事件
+      this.$nextTick(() => {
+        this.$bus.$emit("change", { category3Id });
+      });
+    },
   },
   components: {
     Category,
