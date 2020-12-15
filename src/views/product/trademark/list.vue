@@ -48,6 +48,19 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- <el-pagination
+      class="trademark-pagination"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :page-sizes="[3, 6, 9]"
+      :page-size.sync="limit"
+      :current-page="page"
+      layout="prev, pager, next, jumper, sizes, total"
+      :total="total"
+    >
+    </el-pagination> -->
+
     <!--
       :page-size.sync="limit"   可以让limit更新变成同步更新
       :current-page.sync="page" 可以让page更新变成同步更新
@@ -63,7 +76,7 @@
           那么$event就为123（第一个参数）
     -->
     <el-pagination
-      class="trademark-pagination"
+      class="pagination"
       @size-change="getPageList(page, $event)"
       @current-change="getPageList($event, limit)"
       :page-sizes="[3, 6, 9]"
@@ -226,6 +239,15 @@ export default {
       };
     },
     update(row) {
+      /*
+        const a = [{x: 1}];
+        const b = a[0];
+        b.x = 2;
+
+        trademarkList: [row]
+        trademarkForm = row
+        trademarkForm.x = 2
+      */
       // 清空表单的校验
       this.$refs.trademarkForm && this.$refs.trademarkForm.clearValidate();
 
@@ -234,9 +256,11 @@ export default {
       // row 代表当前行的数据 {}
       // this.trademarkForm = row; // 地址值一样，修改trademarkForm会导致trademarkList发生变化
       this.trademarkForm = { ...row };
-    
+      // this.trademarkForm = JSON.parse(JSON.stringify(row));
     },
-
+    // updateCount() {
+    //   this.count++;
+    // },
     // 提交表单
     submitForm(form) {
       // 校验表单
@@ -351,8 +375,6 @@ export default {
     可以省略 {}
     可以省略 :
     可以省略 ;
-    
-
 
   scoped
     让样式只在当前组件生效
@@ -364,12 +386,6 @@ export default {
 <style lang="sass" scoped>
 .trademark-img
   width: 150px
-
-.trademark-pagination
-  text-align: right
-
->>>.el-pagination__sizes
-  margin-left: 250px
 
 >>>.avatar-uploader .el-upload
   border: 1px dashed #d9d9d9
