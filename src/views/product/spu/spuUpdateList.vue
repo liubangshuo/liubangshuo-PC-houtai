@@ -448,7 +448,7 @@ export default {
     },
   },
   async mounted() {
-    this.getTrademarkList();
+    this.getTrademarkList();  
     this.getSpuImageList();
     this.getSaleAttrList();
     this.getSpuSaleAttrList();

@@ -10,7 +10,7 @@
       v-show 组件虽然是隐藏的，但是组件被加载了~
      -->
     <SpuShowList v-if="isShowList" @showUpdateList="showUpdateList" />
-    <SpuUpdateList v-else :item="item" />
+    <SpuUpdateList v-else :item="item"  @showList="showList" />
   </div>
 </template>
 
@@ -37,8 +37,8 @@ export default {
       // 等showList组件加载完成，在触发事件
       this.$nextTick(() => {
         this.$bus.$emit("change", { category3Id });
-      });
-    },
+      })
+    }
   },
   components: {
     Category,
