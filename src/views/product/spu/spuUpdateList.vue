@@ -264,8 +264,14 @@ export default {
             spuSaleAttrList: this.spuSaleAttrList,
           };
 
+          let result;
           // 发送请求
-          const result = await this.$API.spu.updateSpu(spu);
+          if (this.spu.id) {
+            result = await this.$API.spu.updateSpu(spu);
+          } else {
+            result = await this.$API.spu.saveSpu(spu);
+          }
+
           if (result.code === 200) {
             // 切换回showList
             this.$emit("showList", this.spu.category3Id);
@@ -361,7 +367,7 @@ export default {
       // 清空选中的销售属性id
       this.spu.sale = "";
     },
-    // 上次图片之前触发的回调
+    // 上传图片之前触发的回调
     beforeAvatarUpload(file) {
       // console.log(file);
       const imgTypes = ["image/jpg", "image/png", "image/jpeg"];
@@ -448,10 +454,14 @@ export default {
     },
   },
   async mounted() {
-    this.getTrademarkList();  
-    this.getSpuImageList();
+    this.getTrademarkList();
     this.getSaleAttrList();
-    this.getSpuSaleAttrList();
+    // 判断是添加还是修改
+    // 修改会有Id 添加没有Id
+    if (this.spu.id) {
+      this.getSpuSaleAttrList();
+      this.getSpuImageList();
+    }
   },
 };
 </script>
