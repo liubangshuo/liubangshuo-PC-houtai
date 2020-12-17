@@ -127,7 +127,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="save">保存</el-button>
-        <el-button @click="$emit('showList', spu.category3Id)">取消</el-button>
+        <el-button @click="$emit('showList')">取消</el-button>
       </el-form-item>
     </el-form>
 
@@ -138,7 +138,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { category } from "@/api";
+
 export default {
   name: "SpuUpdateList",
   props: {
@@ -165,6 +167,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      category: (state) => state.category.category,
+    }),
     // 格式化图片数据
     formatImageList() {
       return this.imageList.map((img) => {
@@ -260,6 +265,7 @@ export default {
           // 收集数据
           const spu = {
             ...this.spu, // 展开数据
+            category3Id: this.category.category3Id,
             spuImageList: this.imageList,
             spuSaleAttrList: this.spuSaleAttrList,
           };
@@ -274,11 +280,8 @@ export default {
 
           if (result.code === 200) {
             // 切换回showList
-            this.$emit("showList", this.spu.category3Id);
-            // this.$nextTick(() => {
-            //   this.$bus.$emit("change", { category3Id: this.spu.category3Id });
-            // });
-            this.$message.success("更新SPU成功~");
+            this.$emit("showList");
+            this.$message.success(`${this.spu.id ? "更新" : "添加"}SPU成功~`);
           } else {
             this.$message.error(result.message);
           }
@@ -367,7 +370,7 @@ export default {
       // 清空选中的销售属性id
       this.spu.sale = "";
     },
-    // 上传图片之前触发的回调
+    // 上次图片之前触发的回调
     beforeAvatarUpload(file) {
       // console.log(file);
       const imgTypes = ["image/jpg", "image/png", "image/jpeg"];
@@ -457,7 +460,7 @@ export default {
     this.getTrademarkList();
     this.getSaleAttrList();
     // 判断是添加还是修改
-    // 修改会有Id 添加没有Id
+    // 修改会有id，添加没有id
     if (this.spu.id) {
       this.getSpuSaleAttrList();
       this.getSpuImageList();
