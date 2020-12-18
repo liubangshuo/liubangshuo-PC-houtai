@@ -51,7 +51,10 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { setStyle } from "element-ui/lib/utils/dom";
+import { mapState, maoActions, mapMutations, mapActions } from "vuex";
+import { category } from "@/api";
+import { mounted } from "v-charts/lib/core";
 
 export default {
   name: "Category",
@@ -63,9 +66,6 @@ export default {
         category2Id: "",
         category3Id: "",
       },
-      // category1List: [], // 1级分类数据
-      // category2List: [],
-      // category3List: [],
     };
   },
   computed: {
@@ -89,14 +89,11 @@ export default {
 
       this["category/getCategory2List"](category1Id);
       // 清空父组件的数据
-      // this.$bus.$emit("clearList");
     },
     async handleSelectChange2(category2Id) {
       this.category.category3Id = "";
 
       this["category/getCategory3List"](category2Id);
-      // 清空父组件的数据
-      // this.$bus.$emit("clearList");
     },
     async handleSelectChange3(category3Id) {
       this["category/SET_CATEGORY3_ID"](category3Id);
@@ -107,6 +104,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 </style>
