@@ -10,21 +10,5 @@ export { default as order } from "./order";
 export { default as trademark } from "./product/trademark";
 export { default as attrs } from "./product/attrs";
 export { default as spu } from "./product/spu";
+export { default as sku } from "./product/sku";
 
-// import { default as order } from './order' // 完整引入
-// import order from './order' // 完整引入的简写
-// export order;
-
-/*
-  {
-    login: { login() {}... },
-    user,
-    role,
-    permission,
-    category,
-    clientUser,
-    order,
-    trademark,
-    attrs
-  }
-*/
